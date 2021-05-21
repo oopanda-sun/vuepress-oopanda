@@ -57,6 +57,7 @@ export default {
         }
     }
 }
+
 </script>
 <style lang='stylus'>
     // $mobileSidebarWidth = $sidebarWidth * 0.82
