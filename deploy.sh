@@ -5,18 +5,20 @@ set -e
 
 # 生成静态文件
 npm run build
+
 # 进入生成的文件夹
 cd docs/.vuepress/dist
+
 # deploy to github pages
 echo 'oopanda.cn' > CNAME
 if [ -z "$GITHUB_TOKEN" ]; then
   msg='deploy'
-#  githubUrl=git@github.com:oopanda-sun/vuepress-theme-vdoing.git
-  https://github.com/oopanda-sun/vuepress-theme-vdoing.git
+#  githubUrl=git@github.com:.git
+  githubUrl=https://github.com/oopanda-sun/vuepress-oopanda.git
 else
   msg='来自github actions的自动部署'
-#  githubUrl=https://oopanda:${GITHUB_TOKEN}@github.com/oopanda-sun/vuepress-theme-vdoing.git
-  https://github.com/oopanda-sun/vuepress-theme-vdoing.git
+#  githubUrl=https://oopanda:${GITHUB_TOKEN}@github.com/oopanda-sun/vuepress-oopanda.git
+  githubUrl=https://github.com/oopanda-sun/vuepress-oopanda.git
   git config --global user.name "oopanda-sun"
   git config --global user.email "402714280@qq.com"
 fi
