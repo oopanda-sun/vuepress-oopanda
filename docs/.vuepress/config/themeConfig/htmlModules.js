@@ -19,75 +19,83 @@
  */
 
 module.exports = {
-  homeSidebarB:
-    `<!-- 纵向自适应 -->
+    homeSidebarB:
+        `<!-- 右侧边栏底部 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
         style="display:block;padding: 0.95rem;"
         data-ad-client="ca-pub-9224233515711708"
-        data-ad-slot="7802654582"
+        data-ad-slot="6808683170"
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>`,
-  // sidebarT:
-  //   `<!--  固定100% * 150px可显示，max-height:150px 未见显示-->
-  //   <ins class="adsbygoogle"
-  //         style="display:inline-block;width:100%;max-height:150px"
-  //         data-ad-client="ca-pub-9224233515711708"
-  //         data-ad-slot="6625304284"></ins>
-  //     <script>
-  //         (adsbygoogle = window.adsbygoogle || []).push({});
-  //     </script>`,
-  sidebarB:
-    `<!-- 正方形 -->
+    sidebarT:
+        `<!--  左侧边栏顶部-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-9224233515711708"
+     data-ad-slot="1696506035"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>`,
+    sidebarB:
+        `<!-- 左侧栏底部 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-9224233515711708"
-          data-ad-slot="3508773082"
+          data-ad-slot="2156984118"
           data-ad-format="auto"
           data-full-width-responsive="true"></ins>
       <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
       </script>`,
-  pageT:
-    `<!-- 固定100% * 90px可显示，max-height:90px未见显示-->
+    pageT:
+        `<!-- 文章顶部-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
      <ins class="adsbygoogle"
-          style="display:inline-block;width:100%;max-height:90px"
-          data-ad-client="ca-pub-9224233515711708"
-          data-ad-slot="6625304284"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>`,
-  // pageTshowMode: 'article',
-  pageB:
-    `<!-- 横向自适应 -->
-      <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-9224233515711708"
-          data-ad-slot="6620245489"
+          data-ad-slot="1387715973"
           data-ad-format="auto"
           data-full-width-responsive="true"></ins>
       <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
       </script>`,
-  // pageBshowMode: 'article',
-  // windowLB: // 会遮挡部分侧边栏
-  //   `<!-- 固定200*200px -->
-  //     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  //     <ins class="adsbygoogle"
-  //         style="display:inline-block;width:200px;height:200px"
-  //         data-ad-client="ca-pub-9224233515711708"
-  //         data-ad-slot="6625304284"></ins>
-  //     <script>
-  //         (adsbygoogle = window.adsbygoogle || []).push({});
-  //     </script>`,
-  windowRB:
-     `<!-- 固定160*160px -->
+    // pageTshowMode: 'article',
+    pageB:
+        `<!-- 文章底部 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"
-          style="display:inline-block;max-width:160px;max-height:160px"
+          style="display:block"
           data-ad-client="ca-pub-9224233515711708"
-          data-ad-slot="8377369658"></ins>
+          data-ad-slot="7196244720"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>`,
+    pageBshowMode: 'article',
+    windowLB: // 会遮挡部分侧边栏
+        `<!-- 左侧底部悬浮 -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+          style="display:inline-block;width:200px;height:200px"
+          data-ad-client="ca-pub-9224233515711708"
+          data-ad-slot="7051940349"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>`,
+    windowRB:
+        `<!-- 右侧底部悬浮 -->
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+     <ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-9224233515711708"
+     data-ad-slot="9719779363"></ins>
       <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
@@ -97,11 +105,11 @@ module.exports = {
 
 
 // module.exports = {
-//   homeSidebarB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   sidebarT: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   sidebarB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   pageT: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   pageB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   windowLB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
-//   windowRB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试</div>`,
+//     homeSidebarB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试1</div>`,
+//     sidebarT: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试2</div>`,
+//     sidebarB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试3</div>`,
+//     pageT: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试4</div>`,
+//     pageB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试5</div>`,
+//     windowLB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试6</div>`,
+//     windowRB: `<div style="width:100%;height:100px;color:#fff;background: #eee;">自定义模块测试7</div>`,
 // }

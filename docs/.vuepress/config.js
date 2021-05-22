@@ -7,7 +7,7 @@ module.exports = {
     theme: require.resolve('../../theme-vdoing'), // 使用本地主题
 
     title: "oopanda",
-  description: 'oopanda博客,sunho,Android,iOS,Java,Kotlin,Flutter,Python,Django,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,git,github,markdown',
+    description: 'oopanda博客,sunho,Android,iOS,Java,Kotlin,Flutter,Python,Django,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,git,github,markdown',
     // base: '/', // 格式：'/<仓库名>/'， 默认'/'
     base: '/', // 格式：'/<仓库名>/'， 默认'/'
     markdown: {
