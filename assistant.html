@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>店长助手下载</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="minimal-ui,width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <meta name="keywords" content="店长助手,云巡店,喰星云,奥琦玮" />
+    <meta name="description" content="店长助手是连锁门店经营管理专家，秉承精细化管理的核心理念，支持连锁门店（餐饮、酒店、零售）进行经营要素的预前管理。店长助手依托于PDCA管理学模型，设计并实现" />
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .el-tag {
+        justify-content: flex-end;
+        text-align: right;
+        margin: 10px;
+        font-size: 15px;
+    }
+
+
+</style>
+
+<body>
+<div>
+    <div id="app">
+        <el-tag v-if="isWechat" size="medium" type="danger">因为微信限制,请打开浏览器进行下载<i class="el-icon-top-right"></i></el-tag>
+        <img src="/img/logo/dzzs.png">
+        <el-button v-if="!isWechat" type="primary" @click="download()">点击下载</el-button>
+    </div>
+</div>
+</body>
+<script  src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM401HDSQ1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM401HDSQ1"></script>
+<script async type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1279350766&web_id=1279350766"></script>
+<script async data-ad-client="ca-pub-9224233515711708" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224233515711708"
+        crossorigin="anonymous"></script>
+<script  >
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-TM401HDSQ1');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?670c98310106d8f580d17f583e1715ee";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+new Vue({
+    el: '#app',
+    data: function () {
+        return {
+            isWechat: false,
+            isIOS: false,
+
+        }
+    },
+    created: function () {
+        this.init()
+    },
+    methods: {
+        init: function () {
+            let ua = navigator.userAgent.toLowerCase();
+            this.isWechat = ua.indexOf('micromessenger') != -1;
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+                this.isIOS = true;
+            }
+
+                },
+        download: function () {
+
+
+            if (!this.isWechat) {
+                if (this.isIOS) {
+                    window.location.href = "https://apps.apple.com/cn/app/id1580025464";
+
+                }else{
+                    window.location.href = "https://dzzsbucket.oss-cn-shanghai.aliyuncs.com/app/latest.apk";//下载地址
+
+                }
+            }
+        }
+    }
+})
+</script>
+
+</html>

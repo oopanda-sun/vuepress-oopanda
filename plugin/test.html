@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页HTTP请求头Request Headers在线生成User-Agent_在线工具</title>
+    <meta name="description"
+          content="User-Agent生成器，网页请求头生成器，自动生成请求头Request Headers，在线生成各种浏览器ie、chrome、firefox等的请求头user-agent，Python爬虫的headers参数自动生成。">
+    <meta name="keywords" content="网页请求头,Request Headers,User-Agent,在线工具">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container py-5">
+    <div class="text-center pb-4">
+        <h1 class="font-weight-bold">User-Agent生成工具</h1>
+        <p class="lead">根据需求生成User-Agent</p>
+    </div>
+
+    <div class="mb-3">
+        <form class="form-horizontal">
+            <h3 class="card-title pl-2 title-info">参数选择</h3>
+            <div class="control-group text-center">
+                <label class="control-label ">设备:</label>
+                <div class="controls " id="device_type">
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="device_type" type="checkbox"
+                                                          value="desktop">desktop</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="device_type" type="checkbox"
+                                                          value="tablet">tablet</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="device_type" type="checkbox"
+                                                          value="smartphone">smartphone</label>
+                </div>
+            </div>
+            <div class="control-group text-center">
+                <label class="control-label">系统：</label>
+                <div class="controls" id="os">
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="os" type="checkbox"
+                                                          value="win">win</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="os" type="checkbox" value="linux">linux</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="os" type="checkbox"
+                                                          value="mac">mac</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="os" type="checkbox" value="android">android</label>
+                </div>
+            </div>
+            <div class="control-group text-center">
+                <label class="control-label">浏览器：</label>
+                <div class="controls" id="navigator">
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="navigator" type="checkbox" value="ie">ie</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="navigator" type="checkbox"
+                                                          value="chrome">chrome</label>
+                    <label class="checkbox inline"><input class="ml-2 mr-3" name="navigator" type="checkbox"
+                                                          value="firefox">firefox</label>
+                </div>
+            </div>
+        </form>
+        <button type="submit" class="btn btn-info btn-block rounded-0 test-c" id="get_useragent">生成 User-Agent</button>
+    </div>
+    <div class="card mb-3 rounded-0">
+        <div class="card-header text-center text-info font-weight-bold py-2">User-Agent</div>
+        <div class="card-body push-result text-center p-3">结果显示区</div>
+    </div>
+    <div class="card-body p-0">
+        <h3 class="card-title pl-2 title-info">工具说明：</h3>
+        <ul>
+            <li>User-Agent多用于爬虫程序中设置请求头Headers，是爬虫程序最简单的伪装</li>
+            <li>本工具通过设置不同的参数自动生成不同平台不同系统不同浏览器的User-Agent</li>
+            <li>参数不选的时候表示不设置限制，随机生成User-Agent，设置了参数就生成对应参数的User-Agent</li>
+            <li>当设置的参数之间有冲突的时候，将无法生成合适的User-Agent，会显示错误信息</li>
+        </ul>
+    </div>
+</div>
+<!-- 引入jQuery和Bootstrap的JavaScript库 -->
+<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- 自己编写的JavaScript代码 -->
+<script>
+    $("#get_useragent").click(function(){
+        let d_tags = $("#device_type input:checkbox:checked");
+        let os_tags = $("#os input:checkbox:checked");
+        let n_tags = $("#navigator input:checkbox:checked");
+        function getRandomUserAgent(deviceTypes, operatingSystems, browsers) {
+            // 随机选择一个设备类型、一个操作系统和一个浏览器
+            const device = deviceTypes[Math.floor(Math.random() * deviceTypes.length)];
+            const os = operatingSystems[Math.floor(Math.random() * operatingSystems.length)];
+            const browser = browsers[Math.floor(Math.random() * browsers.length)];
+
+            // 根据选中的设备、操作系统和浏览器类型生成 User-Agent 字符串
+            let userAgent = '';
+            if (device === 'desktop') {
+                userAgent += 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) ';
+            } else if (device === 'tablet') {
+                userAgent += 'Mozilla/5.0 (iPad; CPU OS 14_6 like Mac OS X) ';
+            } else if (device === 'smartphone') {
+                userAgent += 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) ';
+            }
+
+            if (os === 'win') {
+                userAgent += 'Windows NT 10.0; ';
+            } else if (os === 'linux') {
+                userAgent += 'Linux; ';
+            } else if (os === 'mac') {
+                userAgent += 'Macintosh; Intel Mac OS X 11_5_2; ';
+            } else if (os === 'android') {
+                userAgent += 'Android 11; ';
+            }
+
+            if (browser === 'ie') {
+                userAgent += 'Trident/7.0; rv:11.0) like Gecko';
+            } else if (browser === 'chrome') {
+                userAgent += 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36';
+            } else if (browser === 'firefox') {
+                userAgent += 'Gecko/20100101 Firefox/89.0';
+            }
+
+            return userAgent;
+        }
+
+    })
+</script>
+</body>
+
+
+</html>

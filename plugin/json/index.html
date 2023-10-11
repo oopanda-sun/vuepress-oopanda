@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Json在线解析及格式化验证 - Json.cn</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta http-equiv="Cache-Control" content="max-age=7200"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="baidu-site-verification" content="mlJsiTNxiD"/>
+    <meta name="google-site-verification" content="CPogK9tQWL5XIDF9F9x_tJyy1HtpDI8Rv6owOEIkUvM"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all"/>
+    <meta name="author" content="json.cn"/>
+
+    <meta name="keywords" content="json,json在线解析,json格式化,json格式验证,json转xml,xml转json"/>
+    <meta name="description" content="Json中文网致力于在中国推广Json,并提供相关的Json解析、验证、格式化、压缩、编辑器以及Json与XML相互转换等服务"/>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <style></style>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Favicons -->
+</head>
+<body style="over-flow:hidden;">
+
+<main class="row-fluid plugin">
+    &#8672
+    &#9728
+    <div class="col-md-5" style="padding:0;">
+        <textarea id="json-src" placeholder="在此输入json字符串或XML字符串..." class="form-control"
+                  style="height:722px;padding:20px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;"></textarea>
+    </div>
+    <div class="col-md-7" style="padding:0;">
+        <div style="padding:10px;font-size:16px;border-bottom:solid 1px #ddd;" class="navi">
+            <a href="#" class="tip zip" title="压缩" data-placement="bottom"><i class="fa fa-database"></i></a>
+            <a href="#" class="tip shown" title="显示行号" data-placement="bottom"><i class="fa fa-sort-amount-asc"></i></i></a>
+            <a href="index.html#" class="tip clear" title="清空" data-placement="bottom"><i class="fa fa-trash"></i></a>
+            <a href="#" class="tip compress" title="折叠" data-toggle="tooltip" data-placement="bottom"><i
+                    class="fa fa-compress"></i></a>
+
+            <a href="#" class="tip copy" title="复制" data-clipboard-target="#json-target" data-toggle="tooltip"
+               data-placement="bottom"><i
+                    class="fa fa-copy"></i></a>
+            <a href="#" class="tip save" title="下载" data-toggle="tooltip" data-placement="bottom"><i
+                    class="fa fa-download"></i></a>
+            <a href="#" class="tip xml" title="转XML" data-toggle="tooltip" data-placement="bottom"><i
+                    class="fa fa-file-excel-o"></i></a>
+        </div>
+        <div id="right-box"
+             style="height:679px;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none;overflow-y:scroll; outline:none;position:relative;">
+            <div id="line-num"
+                 style="background-color:#fafafa;padding:0px 8px;float:left;border-right:dashed 1px #eee;display:none;z-index:-1;color:#999;position:absolute;text-align:center;over-flow:hidden;">
+                <div>0</div>
+            </div>
+            <div class="ro" id="json-target" style="padding:0px 25px;">
+            </div>
+        </div>
+        <form id="form-save" method="POST"><input type="hidden" value="" id="txt-content" name="content"></form>
+    </div>
+    <br style="clear:both;"/>
+</main>
+<link href="css/jquery.numberedtextarea.css" rel="stylesheet">
+<script src="../../js/jquery.min.js"></script>
+<script src="js/jquery.message.js"></script>
+<script src="js/jquery.json.js"></script>
+<script src="js/jquery.xml2json.js"></script>
+<script src="js/jquery.json2xml.js"></script>
+<script src="js/json2.js"></script>
+<script src="js/jsonlint.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.numberedtextarea.js"></script>
+<script src="../../js/file.js"></script>
+<script type="text/javascript">
+    $('textarea').numberedtextarea();
+    let current_json = '';
+    let current_json_str = '';
+    let xml_flag = false;
+    let zip_flag = false;
+    let shown_flag = false;
+    let compress_flag = false;
+    $('.tip').tooltip();
+
+    function init() {
+        xml_flag = false;
+        zip_flag = false;
+        shown_flag = false;
+        compress_flag = false;
+        renderLine();
+        $('.xml').attr('style', 'color:#999;');
+        $('.zip').attr('style', 'color:#999;');
+
+    }
+
+    $('#json-src').keyup(function () {
+        init();
+        let content = $.trim($(this).val());
+        let result = '';
+        if (content != '') {
+            //如果是xml,那么转换为json
+            if (content.substr(0, 1) === '<' && content.substr(-1, 1) === '>') {
+                try {
+                    let json_obj = $.xml2json(content);
+                    content = JSON.stringify(json_obj);
+                } catch (e) {
+                    result = '解析错误：<span style="color: #f1592a;font-weight:bold;">' + e.message + '</span>';
+                    current_json_str = result;
+                    $('#json-target').html(result);
+                    return false;
+                }
+            }
+            try {
+                content = content.replace(/[\r\n]/g, "");
+                current_json = jsonlint.parse(content);
+                current_json_str = JSON.stringify(current_json);
+                result = new JSONFormat(content, 4).toString();
+            } catch (e) {
+                result = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
+                current_json_str = result;
+            }
+console.log(result)
+            $('#json-target').html(result);
+        } else {
+            $('#json-target').html('');
+        }
+
+    });
+    $('.xml').click(function () {
+        if (xml_flag) {
+            $('#json-src').keyup();
+        } else {
+            let result = $.json2xml(current_json);
+            $('#json-target').html('<textarea style="width:100%;height:100%;border:0;resize:none;">' + result + '</textarea>');
+            xml_flag = true;
+            $(this).attr('style', 'color:#15b374;');
+        }
+        return false;
+    });
+    $('.save').click(function () {
+
+        let text = $('#json-target').text().replace('　　', '    ');
+        let blob = new Blob([text], {type: "application/json;charset=utf-8"});
+        let timestamp = new Date().getTime();
+        saveAs(blob, "oopanda-" + timestamp + ".json");
+        return false;
+    });
+    $('.shown').click(function () {
+        if (!shown_flag) {
+            renderLine();
+            $('#json-src').attr("style", "height:722px;padding:0 10px 10px 40px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;");
+            $('#json-target').attr("style", "padding:0px 50px;");
+            $('#line-num').show();
+            $('.numberedtextarea-line-numbers').show();
+            shown_flag = true;
+            $(this).attr('style', 'color:#15b374;');
+        } else {
+            $('#json-src').attr("style", "height:722px;padding:0 10px 10px 20px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;");
+            $('#json-target').attr("style", "padding:0px 20px;");
+            $('#line-num').hide();
+            $('.numberedtextarea-line-numbers').hide();
+            shown_flag = false;
+            $(this).attr('style', 'color:#999;');
+        }
+        return false;
+    });
+
+    function renderLine() {
+        let line_num = $('#json-target').height() / 20;
+        $('#line-num').html("");
+        let line_num_html = "";
+        for (let i = 1; i < line_num + 1; i++) {
+            line_num_html += "<div>" + i + "<div>";
+        }
+        $('#line-num').html(line_num_html);
+    }
+
+    $('.zip').click(function () {
+        if (zip_flag) {
+            $('#json-src').keyup();
+        } else {
+            $('#json-target').html(current_json_str);
+            zip_flag = true;
+            // $(this).attr('style', 'color:#15b374;');
+            $(this).attr('class', 'theme');
+        }
+        return false;
+    });
+    $('.clear').click(function () {
+        $('#json-src').val('');
+        $('#json-target').html('');
+        return false;
+    });
+    $('.save').click(function () {
+        let content = JSON.stringify(current_json);
+        $('#txt-content').val(content);
+        // $("#form-save").submit();
+        return false;
+    });
+    $('.compress').click(function () {
+        if (!compress_flag) {
+            $(this).attr('style', 'color:#15b374;');
+
+            $($(".fa-minus-square-o").toArray().reverse()).click();
+            compress_flag = true;
+        } else {
+            while ($(".fa-plus-square-o").length > 0) {
+                $(".fa-plus-square-o").click();
+            }
+            compress_flag = false;
+            $(this).attr('style', 'color:#555;');
+            $(this).attr('title', '折叠').tooltip('fixTitle').tooltip('show');
+        }
+        return false;
+    });
+    $('.copy').click(function () {
+        navigator.clipboard.writeText(current_json_str)
+            .then(() => {
+                console.log('Text copied to clipboard')
+                console.log(current_json_str)
+            })
+            .catch((error) => {
+                console.error('Could not copy text: ', error)
+            })
+        return false;
+    });
+
+    $('#json-src').keyup();
+    // let clipboard = new Clipboard('.copy');
+</script>
+</body>
+</html>

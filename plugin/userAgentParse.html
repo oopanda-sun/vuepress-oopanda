@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Agent解析_在线工具</title>
+    <meta name="description"
+          content="User-Agent解析_浏览器ie、chrome、firefox等的请求头user-agent，P爬虫的headers参数自动生成。">
+    <meta name="keywords" content="网页请求头,Request Headers,User-Agent,在线工具">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container py-5">
+    <div class="text-center pb-4">
+        <h1 class="font-weight-bold">User-Agent解析工具</h1>
+        <p class="lead">根据User-Agent分析设备,系统,浏览器等信息</p>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <label for="form-text">User-Agent</label>
+            <textarea placeholder="输入你需要解析的User-Agent" class="form-control rounded-0" id="form-text" rows="8" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-info btn-block rounded-0 test-c" id="useragent_parse">解析</button>
+    </form>
+    <div class="card mb-3 rounded-0">
+        <div class="card-header text-center text-info font-weight-bold py-2">分析结果</div>
+        <div class="card-body push-result text-center p-3">结果显示区</div>
+    </div>
+    <div class="card-body p-0">
+        <h3 class="card-title pl-2 title-info">工具说明：</h3>
+        <ul>
+            <li>User-Agent多用于爬虫程序中设置请求头Headers，是爬虫程序最简单的伪装</li>
+            <li>本工具根据User-Agent分析设备,系统,浏览器等信息</li>
+        </ul>
+    </div>
+</div>
+<!-- 引入jQuery和Bootstrap的JavaScript库 -->
+<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.35/ua-parser.min.js"></script>
+<!-- 自己编写的JavaScript代码 -->
+<script>
+    $("#useragent_parse").click(function(){
+        let parser = new UAParser(navigator.userAgent); // you need to pass the user-agent for nodejs
+        console.log(parser); // {}
+        let parserResults = parser.getResult();
+        console.log(parserResults);
+        /*
+          {
+            ua      : "",
+            browser : {},
+            engine  : {},
+            os      : {},
+            device  : {},
+            cpu     : {}
+          }
+        */
+        $('#result-area').html(parserResults.toString());
+
+    })
+</script>
+</body>
+
+
+</html>
